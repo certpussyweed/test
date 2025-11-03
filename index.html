@@ -1,0 +1,350 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LillianLynne - Socials</title>
+
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* Basic Reset & Global Styling */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            /* 1. TEXT COLOR: Changed to pure white */
+            color: #ffffff;
+            background: #000;
+            overflow: hidden;
+        }
+
+        #background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            /* 2. VIDEO FILTER: Added pink tint (sepia/hue-rotate) */
+            filter: sepia(0.3) saturate(1.5) hue-rotate(-20deg);
+            z-index: -3;
+        }
+
+        #dot-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .dot {
+            position: absolute;
+            /* Dot color will be handled by script.js, should be a light color */
+            background-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-100vh);
+        }
+
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* 3. OVERLAY: Changed to light pink/white transparent background */
+            background: rgba(253, 221, 226, 0.9); /* FDDDE2 with high opacity */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: opacity 1s ease-in-out;
+            text-align: center;
+        }
+
+        #click-text {
+            font-size: 2em;
+            color: #000; /* Black text to stand out against the pink overlay */
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+            letter-spacing: 2px;
+            transition: opacity 0.5s;
+        }
+
+        #main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            z-index: 5;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            gap: 15px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .profile-card {
+            width: 600px;
+            max-width: 90vw;
+            padding: 15px 20px;
+            text-align: left;
+            position: relative;
+            /* 4. PROFILE CARD: Light pink gradient background */
+            background: linear-gradient(135deg, rgba(253, 221, 226, 0.85) 0%, rgba(253, 221, 226, 0.75) 100%); /* FDDDE2 transparent */
+
+            border-radius: 20px;
+            /* Border and Box Shadow are kept subtle/light */
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .top-card {
+            display: flex;
+            align-items: flex-start;
+            padding-bottom: 20px;
+        }
+
+        .pfp-stack {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-right: 20px;
+            flex-shrink: 0;
+            margin-top: 45px;
+            height: 100px;
+        }
+
+        .pfp-placeholder {
+            width: 100px;
+            height: 100px;
+            border: 1px solid #999999; /* Darker border for contrast */
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            margin-top: -90px;
+            margin-bottom: 5px;
+            z-index: 2;
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+            .pfp-placeholder img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+            }
+
+        .right-content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            margin-top: 65px;
+        }
+
+        .profile-header-content {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .name-position-fix {
+            margin-left: -120px;
+            width: auto;
+            text-align: left;
+        }
+
+        .main-name {
+            font-size: 1.5em;
+            margin: 0;
+            /* 5. NAME COLOR: Pure white */
+            color: #ffffff;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Darker shadow for visibility */
+            line-height: 1.2;
+            white-space: nowrap;
+        }
+
+        .emoji-roles-canvas {
+            /* 6. ROLE CANVAS: Light pink background */
+            background-color: rgba(253, 221, 226, 0.7);
+            padding: 5px 10px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: -3px;
+        }
+
+        .colored-icons {
+            display: flex;
+            gap: 5px;
+        }
+
+        .role-badge {
+            position: relative;
+            cursor: pointer;
+            display: inline-block;
+            transition: opacity 0.2s;
+        }
+
+            .role-badge i {
+                font-size: 1.2em;
+                line-height: 1;
+                padding: 2px 0;
+                display: block;
+            }
+
+            /* The role icons are already set to #FDDDE2 in the HTML below, which is correct */
+
+            .role-badge::after {
+                content: attr(data-tooltip);
+                position: absolute;
+                bottom: 150%;
+                left: 50%;
+                transform: translateX(-50%);
+                white-space: nowrap;
+                padding: 5px 8px;
+                border-radius: 5px;
+                /* Tooltip background is kept light/white */
+                background-color: rgba(255, 255, 255, 0.9);
+                /* Tooltip text is black for contrast */
+                color: #000;
+                font-size: 0.8em;
+                font-style: normal;
+                font-weight: bold;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.3s ease-in-out;
+                z-index: 100;
+                text-shadow: none;
+            }
+
+            .role-badge:hover::after {
+                opacity: 1;
+            }
+
+        /* Time Bar Positioning (Top Right) */
+        #time-bar {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 0.9em;
+            /* 7. TIME COLOR: Pure white */
+            color: #ffffff;
+            z-index: 5;
+        }
+
+        .tagline {
+            font-size: 1em;
+            /* 8. TAGLINE COLOR: Pure white */
+            color: #ffffff;
+            margin-top: 5px;
+            margin-bottom: 0;
+            font-style: italic;
+            margin-left: -120px;
+        }
+
+        .social-buttons {
+            display: flex;
+            gap: 30px;
+            width: 100%;
+            justify-content: center;
+            padding: 0;
+        }
+
+            .social-buttons a {
+                /* 9. SOCIAL BUTTONS: Pure white */
+                color: #ffffff;
+                font-size: 2.8em;
+                text-decoration: none;
+                transition: color 0.3s, transform 0.2s;
+                text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+            }
+
+                .social-buttons a:hover {
+                    color: #FDDDE2; /* Hover color is light pink */
+                    transform: scale(1.1);
+                }
+    </style>
+</head>
+<body>
+
+    <video id="background-video" src="MFVideo.mp4" loop muted playsinline></video>
+
+    <div id="dot-container"></div>
+
+    <div id="overlay">
+        <h1 id="click-text">click to enter...</h1>
+    </div>
+
+    <div id="main-content" class="hidden">
+
+        <div class="profile-card top-card">
+
+            <div id="time-bar">
+                <span id="time-display">Loading...</span>
+            </div>
+
+            <div class="pfp-stack">
+                <div class="pfp-placeholder">
+                    <img src="LillianLynne.png" alt="PFP">
+                </div>
+            </div>
+
+            <div class="right-content">
+                <div class="profile-header-content">
+                    <div class="name-position-fix">
+                        <h1 class="main-name">LillianLynne</h1>
+                    </div>
+
+                    <div class="emoji-roles-canvas">
+                        <div class="colored-icons">
+                            <span class="role-badge" data-tooltip="Izzy & Amaya">
+                                <i class="fa-solid fa-cat" style="color: #FDDDE2"></i>
+                            </span>
+                            <span class="role-badge" data-tooltip="06v6 Mustang GT">
+                                <i class="fa-solid fa-car" style="color: #FDDDE2;"></i>
+                            </span>
+                            <span class="role-badge" data-tooltip="Random ahh strawberry">
+                                <i class="fa-solid fa-strawberry" style="color: #FDDDE2;"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="tagline">Piss on the world.</p>
+            </div>
+
+        </div>
+
+        <div class="profile-card social-buttons-card">
+            <div class="social-buttons">
+                <a href="https://www.tiktok.com/@lillianlynne" target="_blank" title="TikTok">
+                    <i class="fa-brands fa-tiktok"></i>
+                </a>
+                <a href="https://www.youtube.com/@Pooperschw4rtz" target="_blank" title="YouTube">
+                    <i class="fa-brands fa-youtube"></i>
+                </a>
+                <a href="https://www.instagram.com/pooperschw4rtz/" target="_blank" title="Instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
