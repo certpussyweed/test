@@ -1,0 +1,141 @@
+﻿/* Basic Reset & Global Styling */
+body {
+    margin: 0;
+    padding: 0;
+    /* Use a sleek, modern font like Helvetica, Arial, or a custom one */
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    color: #fff; /* Default text color is white */
+    background: #000; /* Default background is black */
+    overflow: hidden; /* Prevent scrolling for full-screen effect */
+}
+
+/* --- 1. Video Background Styling --- */
+#background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    filter: grayscale(100%); /* Make the background video black and white */
+    z-index: -2;
+}
+
+/* --- 2. The 'Click To Enter' Overlay Styling --- */
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Slightly tinted transparent black with blur, as requested */
+    background: rgba(0, 0, 0, 0.85); /* Darker tint for the overlay */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: opacity 1s ease-in-out;
+}
+
+#click-text {
+    font-size: 2em;
+    color: #fff;
+    /* Clean white text, no neon shadow */
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    letter-spacing: 2px;
+}
+
+/* --- 3. Main Content Styling --- */
+#main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+    z-index: 5;
+    opacity: 0;
+    transition: opacity 1s ease-in-out 1s;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* --- The New Card/Container Style (Frosted Glass) --- */
+.profile-card {
+    /* Dimensions and centering */
+    width: 350px; /* Adjust as needed */
+    padding: 40px 20px;
+    text-align: center;
+    /* Frosted Glass Effect (Crucial) */
+    background: rgba(255, 255, 255, 0.05); /* Very light, translucent white background */
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    backdrop-filter: blur(12px); /* This blurs the video behind the card */
+    -webkit-backdrop-filter: blur(12px);
+    /* Subtle lighting/dots to match the reference */
+    position: relative;
+}
+
+    /* Optional: Subtle 'glow' inside the card to match reference */
+    .profile-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        pointer-events: none;
+        background: radial-gradient(circle at 50% 10%, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    }
+
+.pfp {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #fff;
+    margin-bottom: 15px;
+}
+
+.main-name {
+    font-size: 2.5em;
+    margin: 0 0 5px;
+    color: #fff;
+    text-shadow: 0 0 5px #000; /* Subtle shadow for contrast */
+}
+
+.tagline {
+    font-size: 1em;
+    color: #bbb;
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.location {
+    font-size: 0.9em;
+    color: #aaa;
+    margin-bottom: 25px;
+}
+
+.social-links {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+    .social-links a {
+        color: #fff;
+        font-size: 2.5em; /* Use a font icon library or images for the icons */
+        transition: color 0.3s;
+    }
+
+        .social-links a:hover {
+            color: #ccc;
+        }
