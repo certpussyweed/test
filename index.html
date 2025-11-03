@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -16,7 +16,7 @@
             padding: 0;
             font-family: 'Helvetica Neue', Arial, sans-serif;
             /* 1. TEXT COLOR: Changed to pure white */
-            color: #ffffff;
+            color: #ffffff; 
             background: #000;
             overflow: hidden;
         }
@@ -29,7 +29,7 @@
             height: 100vh;
             object-fit: cover;
             /* 2. VIDEO FILTER: Added pink tint (sepia/hue-rotate) */
-            filter: sepia(0.3) saturate(1.5) hue-rotate(-20deg);
+            filter: sepia(0.3) saturate(1.5) hue-rotate(-20deg); 
             z-index: -3;
         }
 
@@ -47,7 +47,7 @@
         .dot {
             position: absolute;
             /* Dot color will be handled by script.js, should be a light color */
-            background-color: rgba(255, 255, 255, 0.4);
+            background-color: rgba(255, 255, 255, 0.4); 
             transform: translateY(-100vh);
         }
 
@@ -66,7 +66,7 @@
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            transition: opacity 1s ease-in-out;
+            transition: opacity 1s ease-in-out; 
             text-align: center;
         }
 
@@ -100,13 +100,14 @@
             max-width: 90vw;
             padding: 15px 20px;
             text-align: left;
-            position: relative;
+            position: relative; 
+            
             /* 4. PROFILE CARD: Light pink gradient background */
             background: linear-gradient(135deg, rgba(253, 221, 226, 0.85) 0%, rgba(253, 221, 226, 0.75) 100%); /* FDDDE2 transparent */
-
+            
             border-radius: 20px;
             /* Border and Box Shadow are kept subtle/light */
-            border: 1px solid rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.1); 
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
@@ -171,7 +172,7 @@
             font-size: 1.5em;
             margin: 0;
             /* 5. NAME COLOR: Pure white */
-            color: #ffffff;
+            color: #ffffff; 
             text-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Darker shadow for visibility */
             line-height: 1.2;
             white-space: nowrap;
@@ -179,7 +180,7 @@
 
         .emoji-roles-canvas {
             /* 6. ROLE CANVAS: Light pink background */
-            background-color: rgba(253, 221, 226, 0.7);
+            background-color: rgba(253, 221, 226, 0.7); 
             padding: 5px 10px;
             border-radius: 10px;
             display: flex;
@@ -207,8 +208,6 @@
                 display: block;
             }
 
-            /* The role icons are already set to #FDDDE2 in the HTML below, which is correct */
-
             .role-badge::after {
                 content: attr(data-tooltip);
                 position: absolute;
@@ -221,7 +220,7 @@
                 /* Tooltip background is kept light/white */
                 background-color: rgba(255, 255, 255, 0.9);
                 /* Tooltip text is black for contrast */
-                color: #000;
+                color: #000; 
                 font-size: 0.8em;
                 font-style: normal;
                 font-weight: bold;
@@ -239,18 +238,18 @@
         /* Time Bar Positioning (Top Right) */
         #time-bar {
             position: absolute;
-            top: 15px;
+            top: 15px; 
             right: 20px;
             font-size: 0.9em;
             /* 7. TIME COLOR: Pure white */
-            color: #ffffff;
+            color: #ffffff; 
             z-index: 5;
         }
-
+        
         .tagline {
             font-size: 1em;
             /* 8. TAGLINE COLOR: Pure white */
-            color: #ffffff;
+            color: #ffffff; 
             margin-top: 5px;
             margin-bottom: 0;
             font-style: italic;
@@ -267,7 +266,7 @@
 
             .social-buttons a {
                 /* 9. SOCIAL BUTTONS: Pure white */
-                color: #ffffff;
+                color: #ffffff; 
                 font-size: 2.8em;
                 text-decoration: none;
                 transition: color 0.3s, transform 0.2s;
@@ -293,7 +292,7 @@
     <div id="main-content" class="hidden">
 
         <div class="profile-card top-card">
-
+            
             <div id="time-bar">
                 <span id="time-display">Loading...</span>
             </div>
@@ -313,13 +312,13 @@
                     <div class="emoji-roles-canvas">
                         <div class="colored-icons">
                             <span class="role-badge" data-tooltip="Izzy & Amaya">
-                                <i class="fa-solid fa-cat" style="color: #FDDDE2"></i>
+                                <i class="fa-solid fa-cat" style="color: #ffffff;"></i>
                             </span>
                             <span class="role-badge" data-tooltip="06v6 Mustang GT">
-                                <i class="fa-solid fa-car" style="color: #FDDDE2;"></i>
+                                <i class="fa-solid fa-car" style="color: #ffffff;"></i>
                             </span>
                             <span class="role-badge" data-tooltip="Random ahh strawberry">
-                                <i class="fa-solid fa-strawberry" style="color: #FDDDE2;"></i>
+                                <i class="fa-solid fa-strawberry" style="color: #ffffff;"></i>
                             </span>
                         </div>
                     </div>
@@ -327,7 +326,7 @@
 
                 <p class="tagline">Piss on the world.</p>
             </div>
-
+            
         </div>
 
         <div class="profile-card social-buttons-card">
